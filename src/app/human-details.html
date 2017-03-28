@@ -1,0 +1,36 @@
+ <section *ngIf="human">
+     <section>
+        <h3>You selected {{human.name}}</h3>
+        <h4>
+            Occupation: {{human.occupation}} <br/>
+            Gender: {{human.gender}} <br/>
+        </h4>
+    </section>
+ <section>
+    <form (ngSubmit)="saveHumanDetails()" #humanForm="ngForm">
+      <div>
+        <label for="name">Name: </label>
+        <input type="text" name="name" [(ngModel)]="human.name" required #name="ngModel">
+        <div [hidden]="name.valid || name.pristine" class="error">
+            Name is required
+        </div>
+      </div>
+      <div>
+        <label for="occupation">Occupation: </label>
+        <input type="text" name="occupation" [(ngModel)]="human.occupation">
+      </div>
+      <div>
+        <label for="gender">Gender: </label>
+        <select name="gender" [(ngModel)]="human.gender">
+          <option *ngFor="let gender of genders" [value]="gender">{{gender}}</option>
+        </select>
+        <!--<input type="text" name="gender" [(ngModel)]="human.gender">-->
+      </div>
+          <button type="submit" [disabled]="!humanForm.form.valid">Save</button>
+    </form>
+</section>
+
+
+    <br/>
+    <button (click)="goToHumansList()">reset</button>
+</section>
